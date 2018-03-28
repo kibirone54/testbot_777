@@ -1,3 +1,6 @@
+
+
+
 const TelegramBot = require('node-telegram-bot-api')
 const _ = require('lodash')
 const fs = require('fs')
@@ -83,6 +86,9 @@ function sendTextProc(chatId, text2) {
 
 
 }
+require('http').createServer().listen(process.env.PORT || 5000).on('request', function(req, res){
+    res.end('')
+})
 /*
 function sendTextProc(chatId1, text1) {
     const text2 = `ВАШ БАЛАНС, ${msg.from.first_name}\n 1488`
