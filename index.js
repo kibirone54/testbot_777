@@ -1,6 +1,3 @@
-
-
-
 const TelegramBot = require('node-telegram-bot-api')
 const _ = require('lodash')
 const fs = require('fs')
@@ -38,6 +35,7 @@ const PicsScrs = {
 }
 
 bot.onText(/\/start/, msg => {
+    console.log(msg)
 
     const text = `HELLO FROM KOREA,  ${msg.from.first_name}\n WHAT'S UP?`
 
@@ -86,7 +84,8 @@ function sendTextProc(chatId, text2) {
 
 
 }
-require('http').createServer().listen(process.env.PORT || 5000).on('request', function(req, res){
+
+require('http').createServer().listen(process.env.PORT || 5000).on('request', function (req, res) {
     res.end('')
 })
 /*
