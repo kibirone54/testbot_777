@@ -9,7 +9,11 @@ const bot = new TelegramBot(TOKEN, {
 const ONE = {
     shop1: 'Магазин',
     process1: 'процесс',
+    buyrobots: 'Купить роботов',
+    viprobots: 'VIP роботы',
+    myrobots: 'Мои роботы',
     back: 'BACK'
+
 }
 const TWO = {
     balance1: 'баланс',
@@ -60,11 +64,25 @@ bot.onText(/\/start/, msg => {
 bot.on('message', msg => {
     switch (msg.text) {
         case ONE.shop1:
-            sendPicture(msg.chat.id, msg.text)
+            sendPictureScreen(msg.chat.id)
             break
-        case ONE.process1:
-            sendTextProc(msg.chat.id, msg.text)
+        case ONE.back:
+            bot.sendMessage(msg.chat.id, `WHAT NEXT`, {
+                reply_markup: {
+                    keyboard: [
+                        [ONE.process1, ONE.shop1],
+                        [TWO.balance1, TWO.invite1],
+                        [THREE.exchange1, THREE.mingame],
+                        [FOUR.other1, FOUR.settings1]
+                ]
+                }
+
+
+
+
+            })
             break
+
 
     }
 })
@@ -75,24 +93,28 @@ function sendPicture(chatId, picName) {
         if (error) throw new Error(error)
         bot.sendPhoto(chatId, picture)
     })
-}
 
-function sendTextProc(chatId, text2) {
-
-    const text2 = `HELLO FROM KOREA,  ${msg.from.first_name}\n WHAT'S UP?`
-    bot.sendMessage(chatId, text2)
-
+    require('http').createServer().listen(process.env.PORT || 5000).on('request', function (req, res) {
+        res.end('')
+    })
 
 }
 
-require('http').createServer().listen(process.env.PORT || 5000).on('request', function (req, res) {
-    res.end('')
-})
-/*
-function sendTextProc(chatId1, text1) {
-    const text2 = `ВАШ БАЛАНС, ${msg.from.first_name}\n 1488`
-    bot.sendMessage(chatId1, text2)
+function sendPictureScreen(chatId) {
+    bot.sendMessage(chatId, `Выберите пункт меню:  `, {
+            reply_markup: {
+                keyboard: [
+                    [ONE.buyrobots, ONE.viprobots],
+                    [ONE.myrobots, ONE.back]
 
+
+                ]
+
+
+            }
+
+
+        }
+    )
 
 }
-*/
